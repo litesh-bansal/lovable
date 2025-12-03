@@ -1,4 +1,6 @@
 package com.krythos.lovable_clone.dto.subscription;
 
-public record PortalResponse() {
+public record PortalResponse(
+        String portalUrl
+) {
 }

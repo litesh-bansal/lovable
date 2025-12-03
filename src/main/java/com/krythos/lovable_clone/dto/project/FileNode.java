@@ -1,4 +1,11 @@
 package com.krythos.lovable_clone.dto.project;
 
-public class FileNode {
+import java.time.Instant;
+
+public record FileNode(
+        String path,
+        Instant modifiedAt,
+        Long size,
+        String type
+) {
 }

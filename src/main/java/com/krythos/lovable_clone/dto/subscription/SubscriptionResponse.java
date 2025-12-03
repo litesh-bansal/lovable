@@ -1,4 +1,12 @@
 package com.krythos.lovable_clone.dto.subscription;
 
-public record SubscriptionResponse() {
+import java.time.Instant;
+
+public record SubscriptionResponse(
+
+        PlanResponse plan,
+        String status,
+        Instant periodEnd,
+        Long tokenUsedThisCycle
+) {
 }

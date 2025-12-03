@@ -1,4 +1,15 @@
 package com.krythos.lovable_clone.service;
 
+import com.krythos.lovable_clone.dto.subscription.CheckoutRequest;
+import com.krythos.lovable_clone.dto.subscription.CheckoutResponse;
+import com.krythos.lovable_clone.dto.subscription.PortalResponse;
+import com.krythos.lovable_clone.dto.subscription.SubscriptionResponse;
+import org.jspecify.annotations.Nullable;
+
 public interface SubscriptionService {
+    SubscriptionResponse getCurrentSubscription(Long userId);
+
+    CheckoutResponse createCheckoutSessionUrl(Long userId, CheckoutRequest request);
+
+    PortalResponse openCustomerPortal(Long userId);
 }

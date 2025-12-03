@@ -1,4 +1,10 @@
 package com.krythos.lovable_clone.dto.project;
 
-public class ProjectSummaryResponse {
+import java.time.Instant;
+
+public record ProjectSummaryResponse(
+        long id,
+        String name,
+        Instant createdAt
+) {
 }

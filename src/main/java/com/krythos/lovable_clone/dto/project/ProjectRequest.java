@@ -1,4 +1,6 @@
 package com.krythos.lovable_clone.dto.project;
 
-public class ProjectRequest {
+public record ProjectRequest(
+        String name
+) {
 }
