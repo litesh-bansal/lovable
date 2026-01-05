@@ -2,3 +2,21 @@ spring:
   application:
     name: lovable-clone
     description: this is lovable clone
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/krythos
+    username: postgres
+    password: user
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  jwt:
+    secret-key: jfsdfsldjkf0osd0fsdfdfklsdf0sddfksd078867868dfsfsf

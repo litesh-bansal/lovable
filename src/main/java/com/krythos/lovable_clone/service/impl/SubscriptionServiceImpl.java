@@ -1,4 +1,26 @@
 package com.krythos.lovable_clone.service.impl;
 
-public class SubscriptionServiceImpl {
+import com.krythos.lovable_clone.dto.subscription.CheckoutRequest;
+import com.krythos.lovable_clone.dto.subscription.CheckoutResponse;
+import com.krythos.lovable_clone.dto.subscription.PortalResponse;
+import com.krythos.lovable_clone.dto.subscription.SubscriptionResponse;
+import com.krythos.lovable_clone.service.SubscriptionService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SubscriptionServiceImpl implements SubscriptionService {
+    @Override
+    public SubscriptionResponse getCurrentSubscription(Long userId) {
+        return null;
+    }
+
+    @Override
+    public CheckoutResponse createCheckoutSessionUrl(Long userId, CheckoutRequest request) {
+        return null;
+    }
+
+    @Override
+    public PortalResponse openCustomerPortal(Long userId) {
+        return null;
+    }
 }
