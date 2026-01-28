@@ -13,6 +13,7 @@ import com.krythos.lovable_clone.mapper.ProjectMapper;
 import com.krythos.lovable_clone.repository.ProjectMemberRepository;
 import com.krythos.lovable_clone.repository.ProjectsRepository;
 import com.krythos.lovable_clone.repository.UserRepository;
+import com.krythos.lovable_clone.security.AuthUtil;
 import com.krythos.lovable_clone.service.ProjectService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,12 @@ public class ProjectServiceImpl implements ProjectService {
     private final UserRepository userRepository;
     private final ProjectMapper projectMapper;
     private final ProjectMemberRepository projectMemberRepository;
+    private final AuthUtil authUtil;
 
     @Override
-    public ProjectResponse createProject(ProjectRequest request, Long userId) {
+    public ProjectResponse createProject(ProjectRequest request) {
 
+        Long userId = authUtil.getCurrentUserId();
         User owner = userRepository.findById(userId).orElseThrow(
                 () -> new ResourceNotFoundException("user", userId.toString())
         );
@@ -59,21 +62,24 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectSummaryResponse> getUserProjects(Long userId) {
-
+    public List<ProjectSummaryResponse> getUserProjects() {
+        Long userId = authUtil.getCurrentUserId();
         List<Project> project = projectsRepository.findAllProjectByUser(userId);
         return projectMapper.toProjectSummaryResponseList(project);
     }
 
     @Override
-    public ProjectResponse getUserProjectById(Long userId, Long id) {
+    public ProjectResponse getUserProjectById(Long id) {
 
+        Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleProjectById(userId, id);
         return projectMapper.toProjectResponse(project);
     }
 
     @Override
-    public ProjectResponse updateProject(Long userId, Long id, ProjectRequest request) {
+    public ProjectResponse updateProject(Long id, ProjectRequest request) {
+
+        Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleProjectById(userId, id);
 
         project.setName(request.name());
@@ -82,7 +88,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void softDelete(Long id, Long userId) {
+    public void softDelete(Long id) {
+
+        Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleProjectById(userId, id);
         project.setDeletedAt(Instant.now());
         projectsRepository.save(project);
